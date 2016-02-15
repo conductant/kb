@@ -10,19 +10,22 @@ https://www.bartbusschots.ie/s/2005/12/07/ssh-via-a-socks-proxy-on-os-x-with-con
 Steps
 -----
 
-1. Have your PEM file ready.  This can be the PEM file downloaded from AWS (the public/private key pair) and used when starting instances.
+### SSH key
+Have your PEM file ready.  This can be the PEM file downloaded from AWS (the public/private key pair) and used when starting instances.
 Save this file:
     
     + `mv dev.pem ~/.ssh/id_aws_conductant_com_dev.pem`
     + `chmod 600 !$`
    
-2. Compile connect.c:
+### Compile connect.c:
 ```
 gcc connect.c -o connect -lresolv
 sudo cp connect /usr/local/bin
 ```
 
-3. Edit your `~/.ssh/config` to add sections like:
+
+### .ssh/config
+Edit your `~/.ssh/config` to add sections like:
 
 ```
 Host *
@@ -44,7 +47,10 @@ ProxyCommand connect -S localhost:7784 %h %p
 ########################################################
 ```
 
-4. Connect: Simply do this 
+
+### Connect
+Simply do this 
+
 ```
 ssh ssh -L 11080:10.100.113.11:8080 aws.conductant.com
 ```
